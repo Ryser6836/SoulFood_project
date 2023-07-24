@@ -6,12 +6,17 @@ const mongoDB = async () => {
   try {
     await mongoose.connect(mongoURI, { useNewUrlParser: true });
     console.log("connected");
-    const fetchec_data = await mongoose.connection.db.collection("food_items");
-    const data = await fetchec_data.find({}).toArray();
+    const fetched_data = await mongoose.connection.db.collection("food_items");
+    const data = await fetched_data.find({}).toArray();
+    const foodCategory = await mongoose.connection.db.collection(
+      "foodCategory"
+    );
+    const catData = await foodCategory.find({}).toArray();
+    // console.log(catData);
     global.food_items = data;
-    // console.log(global.food_items);
+    global.foodCategory = catData;
   } catch (error) {
-    console.log("---", error);
+    console.error("Error connecting to database:", error);
   }
 };
 module.exports = mongoDB;
