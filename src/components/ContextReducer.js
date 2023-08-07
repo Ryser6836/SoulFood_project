@@ -47,7 +47,7 @@ const reducer = (state, action) => {
           console.log("updated", action, a);
           arr[idx] = {
             ...a,
-            qty: parseInt(action.qty) + a.qty,
+            qty: parseInt(action.qty) + parseInt(a.qty),
             price: action.price + a.price,
           }; // a is the array jo abhi tk cart m prda tha and action contains the updated object's details
         }
